@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <!-- <meta name="description" content="A new Flutter project."> -->
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Yeez">
+  <link rel="apple-touch-icon" href="icons/y_192.webp">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/webp" href="y_16.webp"/>
+
+  <title>Yeez</title>
+  <link rel="manifest" href="manifest.json">
+  <!-- <link rel="image_src" href="https://m.media-amazon.com/images/M/MV5BZDJjOTE0N2EtMmRlZS00NzU0LWE0ZWQtM2Q3MWMxNjcwZjBhXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_UY1200_CR90,0,630,1200_AL_.jpg"> -->
+
+  <meta name="title" content="Yeez">
+  <meta name="description" content="Malaysia E-Menu Platform, just scan the QR code." />
+
+  <!-- The Open Graph protocol -->
+  <meta property="og:title" content="Yeez" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Malaysia E-Menu Platform, just scan the QR code." />
+  <meta property="og:url" content="https://yeez.getitqec.com" />
+  <meta property="og:image" content="./icons/y_512.webp" />
+  
+  <!-- GOOGLE SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="Yeez, Menu, Restaurant" />
+  <meta name="author" content="Get It Tech Solution">
+  <link rel="canonical" href="https://yeez.getitqec.com/">
+
+  <!-- Load Strategy -->
+  <!-- <script defer src="index.dart.js" type="application/javascript"></script> -->
+  <style>
+      .loading {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+      }
+
+      .loader {
+          border-radius: 50%;
+          border-top: 9px solid white;
+          border-right: 9px solid #ffcc00;
+          border-bottom: 9px solid white;
+          border-left: 9px solid #ffcc00;
+          width: 60px;
+          height: 60px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+          0% {
+              -webkit-transform: rotate(0deg);
+          }
+
+          100% {
+              -webkit-transform: rotate(360deg);
+          }
+      }
+
+      @keyframes spin {
+          0% {
+              transform: rotate(0deg);
+          }
+
+          100% {
+              transform: rotate(360deg);
+          }
+      }
+  </style>
+
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    if(window.location.hash.length <= 2) {
+      window.location.replace('https://www.getitqec.com');
+    }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3651794904');
+      });
+    }
+  </script>
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
+  <script defer src="main.dart.js?v=0.0.5-d" type="application/javascript"></script>
+  <!-- <script defer src="main.dart.js?version=0.0.1" type="application/javascript"></script> -->
+</body>
+</html>

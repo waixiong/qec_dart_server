@@ -1,0 +1,53 @@
+version: '3'
+services:
+  yeez_getitqec_server:
+    container_name: dart_getitqec_server
+    image: getitqec/dart_getitqec_server
+    restart: always
+    networks:
+      - server
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "3"
+    volumes:
+      - ./static/:/server/static/
+        #- ./nyes_server/key/:/server/key/
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=server
+      - traefik.http.services.dart_server.loadbalancer.server.port=8080
+      
+      - traefik.http.middlewares.yeez-errorpage.errors.status=404
+      - traefik.http.middlewares.yeez-errorpage.errors.service=dart_server
+      - traefik.http.middlewares.yeez-errorpage.errors.query=/getitqec.com/_error/404.html
+      
+      # - traefik.http.services.yeez_getitqec_server.loadbalancer.server.port=8080
+      - traefik.http.routers.yeez_getitqec_server.rule=Host(`yeez.getitqec.com`)
+      - traefik.http.routers.yeez_getitqec_server.entrypoints=http
+      - traefik.http.routers.yeez_getitqec_server.middlewares=redirect@file
+      - traefik.http.routers.yeez_getitqec_server-secured.rule=Host(`yeez.getitqec.com`)
+      - traefik.http.routers.yeez_getitqec_server-secured.entrypoints=https
+      - traefik.http.routers.yeez_getitqec_server-secured.tls.certresolver=mytlschallenge
+      - traefik.http.middlewares.yeez-ratelimit.ratelimit.average=60
+      - traefik.http.middlewares.yeez-ratelimit.ratelimit.period=3s
+      - traefik.http.middlewares.yeez-ratelimit.ratelimit.burst=12
+      - traefik.http.middlewares.yeez-ratelimit.ratelimit.sourcecriterion.requestheadername=Cookie
+      - traefik.http.middlewares.yeez-inflightreq.inflightreq.amount=15
+      - traefik.http.middlewares.yeez-inflightreq.inflightreq.sourcecriterion.requestheadername=Cookie
+      - traefik.http.middlewares.addprefix-yeez.addprefix.prefix=/getitqec.com/yeez
+      - traefik.http.routers.yeez_getitqec_server-secured.middlewares=addprefix-yeez@docker,compressor@file,cache-header@file,yeez-ratelimit@docker,yeez-inflightreq@docker,yeez-errorpage@docker
+      
+      - traefik.http.routers.www_getitqec_server.rule=Host(`www.getitqec.com`)
+      - traefik.http.routers.www_getitqec_server.entrypoints=http
+      - traefik.http.routers.www_getitqec_server.middlewares=redirect@file
+      - traefik.http.routers.www_getitqec_server-secured.rule=Host(`www.getitqec.com`)
+      - traefik.http.routers.www_getitqec_server-secured.entrypoints=https
+      - traefik.http.routers.www_getitqec_server-secured.tls.certresolver=mytlschallenge
+      - traefik.http.middlewares.addprefix-www.addprefix.prefix=/getitqec.com/www
+      - traefik.http.routers.www_getitqec_server-secured.middlewares=addprefix-www@docker,compressor@file,cache-header@file,yeez-errorpage@docker
+      
+
+networks:
+  server:
+    external: true

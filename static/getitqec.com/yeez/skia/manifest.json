@@ -1,0 +1,23 @@
+{
+    "name": "Yeez",
+    "short_name": "Yeez",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "E-Menu Platform",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/y_192.webp",
+            "sizes": "192x192",
+            "type": "image/webp"
+        },
+        {
+            "src": "icons/y_512.webp",
+            "sizes": "512x512",
+            "type": "image/webp"
+        }
+    ]
+}
